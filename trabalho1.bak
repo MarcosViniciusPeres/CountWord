@@ -1,0 +1,29 @@
+#lang racket
+
+(require examples)
+
+(define-struct freqWord [str num] #:transparent)
+
+
+;; Modelo para lista
+;;(define (fn-para-ldn ldn)
+;;  (cond
+;;    [(empty? ldn) ...]
+;;    [else ... (first ldn)
+;;          ... (fn-para-ldn (rest ldn)) ... ]))
+
+(define (verify string lst)
+  (cond
+    [(empty? lst) empty]
+    [(string=? string (first lst)) + 1 (verify string (rest lst))]
+    [else (verify string (rest lst))]
+    )
+  )
+
+
+(define (contaPalavra lst)
+  (cond
+    [(empty? lst) empty]
+    [else (cons (freqWord (first lst) (verify (first lst) lst)) empty) ]))
+
+(define test (list "Marcao" "Marcao"))
