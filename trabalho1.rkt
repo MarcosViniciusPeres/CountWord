@@ -65,9 +65,10 @@
 (define (insere-ordenado n lst)
   (cond
     [(empty? lst) (link n (empty))]
-    [(< n (link-first lst)) (link n lst)]
+    [(> (freqWord-num n) (freqWord-num (link-first lst))) (link n lst)]
     [else (link (link-first lst)
                 (insere-ordenado n (link-rest lst)))]))
+
 
 (define (ordena lst)
   (cond
@@ -75,10 +76,11 @@
     [else (insere-ordenado (link-first lst)
                            (ordena (link-rest lst)))]))
 
-(define test69 (link 1 (link 9 (link 5 (link -2 (link 8 (link 3 (empty))))))))
+;;(define test69 (link 1 (link 9 (link 5 (link -2 (link 8 (link 3 (empty))))))))
 
+;;(define test (link "Sakura" (link "Naruto" (link "Kakashi" (link "Naruto" (empty))))))
+(define test1 (link (freqWord "Marcao" 1) (link (freqWord "Marcao" 2) (link (freqWord "Marcao" 3) (empty)))))
 
-
-
-(define test (link "Sakura" (link "Naruto" (link "Kakashi" (link "Naruto" (empty))))))
-(define test1 (link (freqWord "Marcao" 3) (link (freqWord "Marcao" 3) (link (freqWord "Marcao" 3) (empty)))))
+;;(insere-ordenado (freqWord "Marcao" 0) test1)
+;;(insere-ordenado (freqWord "Marcao" 0) (link (freqWord "Marcao" 1) (empty)))
+;;(insere-ordenado (freqWord "Marcao" 3) (link (freqWord "Marcao" 1) (empty)))
