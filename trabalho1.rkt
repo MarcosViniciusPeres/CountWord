@@ -62,19 +62,19 @@
 
 ;;------------------------------------ INSERTION SORT -----------------------------------------------
 
-(define (insere-ordenado n lst)
+(define (inserts-ordered n lst)
   (cond
     [(empty? lst) (link n (empty))]
     [(> (freqWord-num n) (freqWord-num (link-first lst))) (link n lst)]
     [else (link (link-first lst)
-                (insere-ordenado n (link-rest lst)))]))
+                (inserts-ordered n (link-rest lst)))]))
 
 
-(define (ordena lst)
+(define (sort lst)
   (cond
     [(empty? lst) (empty)]
-    [else (insere-ordenado (link-first lst)
-                           (ordena (link-rest lst)))]))
+    [else (inserts-ordered (link-first lst)
+                           (sort (link-rest lst)))]))
 
 ;;(define test69 (link 1 (link 9 (link 5 (link -2 (link 8 (link 3 (empty))))))))
 
