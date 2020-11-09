@@ -1,5 +1,6 @@
 #lang racket
 
+;; Marcos Vinicius Peres | RA:94594
 (require examples)
 
 ;; Lista(String), Número -> Lista(Com as k strings mais frequentes e o número de vezes que elas aparecem)
@@ -143,7 +144,7 @@
 
 (examples
  (check-equal? (count-word (empty) 1) (empty))
- (check-equal? (count-word (link "Naruto" (empty)) 0) (print "You can't choose a number equal to or less than zero."))
+ (check-exn exn:fail? (thunk (count-word (link "Naruto" (empty)))))
  (check-equal? (count-word (link "Naruto" (empty)) 1) (link (freqWord "Naruto" 1) (empty)))
  (check-equal? (count-word (link "Naruto" (empty)) 2) (link (freqWord "Naruto" 1) (empty)))
  (check-equal? (count-word (link "Naruto" (link "Naruto" (link "Kakashi" (empty)))) 1)(link (freqWord "Naruto" 2) (empty)))
@@ -151,6 +152,8 @@
                (link (freqWord "Naruto" 2) (link (freqWord "Kakashi" 1) (empty))))
  (check-equal? (count-word (link "Naruto" (link "Naruto" (link "Kakashi" (empty)))) 3)
                (link (freqWord "Naruto" 2) (link (freqWord "Kakashi" 1) (empty))))
+ (check-equal? (count-word (link "Naruto" (link "Kakashi" (link "Sakura" (link "Kakashi" (link "Naruto" (link "Naruto" (empty))))))) 3)
+                           (link (freqWord "Naruto" 3) (link (freqWord "Kakashi" 2) (link (freqWord "Sakura" 1) (empty)))))
  )
 
 #;
@@ -169,7 +172,7 @@
 (define (count-word lst number)
   (cond
     [(empty? lst) (empty)]
-    [(<= number 0) (print "You can't choose a number equal to or less than zero.")]
+    [(<= number 0) (error "You can't choose a number equal to or less than zero.")]
     [else 
      (let* ([occurrence (verify-occurrence (link-first lst) lst)]
             [new-list (remove-duplicates (link-first lst) lst)]
